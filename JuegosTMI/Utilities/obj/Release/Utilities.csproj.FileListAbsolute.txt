@@ -1,0 +1,6 @@
+D:\David_inf\Github\TFG\Puzzle\Utilities\bin\Release\Utilities.dll.config
+D:\David_inf\Github\TFG\Puzzle\Utilities\bin\Release\Utilities.dll
+D:\David_inf\Github\TFG\Puzzle\Utilities\bin\Release\Utilities.pdb
+D:\David_inf\Github\TFG\Puzzle\Utilities\obj\Release\Utilities.csprojResolveAssemblyReference.cache
+D:\David_inf\Github\TFG\Puzzle\Utilities\obj\Release\Utilities.dll
+D:\David_inf\Github\TFG\Puzzle\Utilities\obj\Release\Utilities.pdb

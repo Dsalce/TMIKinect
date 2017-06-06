@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FubarDev.FtpServer.FileSystem.OneDrive</name>
+    </assembly>
+    <members>
+        <member name="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystemProvider">
+            <summary>
+            A file system provider for OneDrive
+            </summary>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystemProvider.#ctor(RestSharp.Portable.Microsoft.OneDrive.Model.Drive,RestSharp.Portable.Microsoft.OneDrive.Model.Item,FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystemProvider"/> class.
+            </summary>
+            <param name="drive">The drive</param>
+            <param name="rootFolder">The root folder entry</param>
+            <param name="supportFactory">A <see cref="T:RestSharp.Portable.Microsoft.OneDrive.IRequestFactory"/> used to create <see cref="T:RestSharp.Portable.IRestClient"/> and <see cref="T:System.Net.HttpWebRequest"/> objects</param>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystemProvider.Create(System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveDirectoryEntry.IsRoot">
+            <inheritdoc/>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveDirectoryEntry.IsDeletable">
+            <inheritdoc/>
+        </member>
+        <member name="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem">
+            <summary>
+            The <see cref="T:FubarDev.FtpServer.FileSystem.IUnixFileSystem"/> implementation for OneDrive
+            </summary>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.#ctor(RestSharp.Portable.Microsoft.OneDrive.OneDriveService,FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory,RestSharp.Portable.Microsoft.OneDrive.Model.Drive,RestSharp.Portable.Microsoft.OneDrive.Model.Item)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem"/> class.
+            </summary>
+            <param name="service">The OneDrive service instance to use for communication with the OneDrive API</param>
+            <param name="supportFactory">A support factory instance to create some classes in a platform-agnostic way</param>
+            <param name="drive">The drive to use</param>
+            <param name="rootFolder">The root folder to use</param>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Service">
+            <summary>
+            Gets the OneDrive API service
+            </summary>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Drive">
+            <summary>
+            Gets the drive to use
+            </summary>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.RootFolderItem">
+            <summary>
+            Gets the root folder item
+            </summary>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.SupportsAppend">
+            <inheritdoc/>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.SupportsNonEmptyDirectoryDelete">
+            <inheritdoc/>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.FileSystemEntryComparer">
+            <inheritdoc/>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Root">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Create(RestSharp.Portable.Microsoft.OneDrive.OneDriveService,FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new instance of <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem"/>
+            </summary>
+            <param name="service">The OneDrive API service to use</param>
+            <param name="supportFactory">The support factory to use</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The new <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem"/> instance</returns>
+            <remarks>
+            This function uses the users default drive and its root folder.
+            </remarks>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Create(RestSharp.Portable.Microsoft.OneDrive.OneDriveService,FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory,RestSharp.Portable.Microsoft.OneDrive.Model.Drive,System.Threading.CancellationToken)">
+            <summary>
+            Creates a new instance of <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem"/>
+            </summary>
+            <param name="service">The OneDrive API service to use</param>
+            <param name="supportFactory">The support factory to use</param>
+            <param name="drive">The drive to get the root folder from</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The new <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem"/> instance</returns>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.AppendAsync(FubarDev.FtpServer.FileSystem.IUnixFileEntry,System.Nullable{System.Int64},System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.CreateAsync(FubarDev.FtpServer.FileSystem.IUnixDirectoryEntry,System.String,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.CreateDirectoryAsync(FubarDev.FtpServer.FileSystem.IUnixDirectoryEntry,System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.GetEntriesAsync(FubarDev.FtpServer.FileSystem.IUnixDirectoryEntry,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.GetEntryByNameAsync(FubarDev.FtpServer.FileSystem.IUnixDirectoryEntry,System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.MoveAsync(FubarDev.FtpServer.FileSystem.IUnixDirectoryEntry,FubarDev.FtpServer.FileSystem.IUnixFileSystemEntry,FubarDev.FtpServer.FileSystem.IUnixDirectoryEntry,System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.OpenReadAsync(FubarDev.FtpServer.FileSystem.IUnixFileEntry,System.Int64,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.ReplaceAsync(FubarDev.FtpServer.FileSystem.IUnixFileEntry,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.SetMacTimeAsync(FubarDev.FtpServer.FileSystem.IUnixFileSystemEntry,System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Nullable{System.DateTimeOffset},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.UnlinkAsync(FubarDev.FtpServer.FileSystem.IUnixFileSystemEntry,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Dispose(System.Boolean)">
+            <summary>
+            Dispose the object
+            </summary>
+            <param name="disposing"><code>true</code> when called from <see cref="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveFileSystem.Dispose"/></param>
+        </member>
+        <member name="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory">
+            <summary>
+            The default implementation of a <see cref="T:RestSharp.Portable.Microsoft.OneDrive.IRequestFactory"/> for Google Drive
+            </summary>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory.#ctor(RestSharp.Portable.Authenticators.OAuth2.OAuth2Client,System.Func{RestSharp.Portable.IRestClient},System.Func{FubarDev.FtpServer.FileSystem.ITemporaryData})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory"/> class.
+            </summary>
+            <param name="oAuth2Client">The OAuth2 client to be used to get the authentication token</param>
+            <param name="restClientCreateFunc">A delegate to create a new <see cref="T:RestSharp.Portable.IRestClient"/></param>
+            <param name="createTempDataFunc">A delegate to create a temporary storage</param>
+        </member>
+        <member name="P:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory.ConfigureWebRequest">
+            <summary>
+            Gets or sets an action that does additional HttpWebRequest configuration
+            </summary>
+            <remarks>
+            This is useful to set the <code>AllowAutoRedirect</code> property which is not available for portable class libraries.
+            </remarks>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory.CreateRestClient(System.Uri)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory.CreateWebRequest(System.Uri)">
+            <inheritdoc/>
+        </member>
+        <member name="M:FubarDev.FtpServer.FileSystem.OneDrive.OneDriveSupportFactory.CreateTemporaryData(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Creates a temporary data store and fills it with the data of the provided <paramref name="data"/> stream.
+            </summary>
+            <param name="data">The data stream to fill the temporary data storage with</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The created temporary data storage</returns>
+        </member>
+    </members>
+</doc>

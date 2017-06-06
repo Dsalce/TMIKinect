@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Hanoi.View.PiecePuzzle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:k="http://schemas.microsoft.com/kinect/2013" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+ 
+        <k:KinectTileButton x:Name="piece"  AllowDrop="True" Height="auto" Width="auto" Click="markEvent"  >
+            <Image x:Name="img" AllowDrop="True" Stretch="Fill" Width="auto" Height="auto" ></Image>
+        </k:KinectTileButton>
+   
+</UserControl>

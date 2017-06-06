@@ -1,0 +1,38 @@
+﻿<Window x:Class="Hanoi.View.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:k="http://schemas.microsoft.com/kinect/2013" 
+        
+         Height="1000" Width="1060"  Top="0" Left="200"  WindowState="Maximized" Loaded="loadWindow" Closed="exitEvent"  >
+
+    <k:KinectRegion x:Name="kinectRegion">
+        <Grid Background="#FF157D87">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="122*" />
+                <RowDefinition Height="438*" />
+                <RowDefinition Height="109*" />
+
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+
+            </Grid.ColumnDefinitions>
+            <k:KinectSensorChooserUI Name="sensorChooserUi" HorizontalAlignment="Center"  Margin="369,19,373,55" Width="310" Grid.Row="0"/>
+            <k:KinectTileButton Height="122"   Width="174" Background="#FF157D87" Click="exitButton" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="878,0,0,0" >
+                <Image Height="Auto" Width="Auto" Stretch="Fill"  Source="imagenes/imageSelectPuzzle/exit.png"  ></Image>
+            </k:KinectTileButton>
+            <k:KinectTileButton Height="122"   Width="174" Background="#FF157D87" Click="maximize" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,174,0" >
+                <Image Height="Auto" Width="Auto" Stretch="Fill"  Source="imagenes/imageSelectPuzzle/expand.png"  ></Image>
+            </k:KinectTileButton>
+            <MediaElement Name="videoControl" Source="View/VideoHelp/helpPuzzle.mp4" Visibility="Visible"   Volume="4"  Grid.Row="1" Margin="0" Position="0:0:3" IsHitTestVisible="True" Focusable="True" LoadedBehavior="Manual" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"
+                    VerticalAlignment="Bottom" Height="80" Margin="221,0,227,25" Width="604" Grid.Row="2">
+                <k:KinectTileButton  Name="BtPlay" Click="BtPlayClick" Content="PLAY" Height="Auto" Foreground="Black" Background="#FF3E8F31" Margin="0,0,0,10" Width="200"/>
+                <k:KinectTileButton  x:Name="BtPause" Click="BtPauseClick" Content="PAUSE" Height="Auto" Foreground="#FF040404" Background="#FF3E8F31" Margin="0,0,0,10" Width="200"/>
+                <k:KinectTileButton  x:Name="BtStop" Click="BtStopClick" Content="STOP" Height="Auto" Foreground="Black" Background="#FF3E8F31" Margin="0,0,0,10" Width="200"/>
+            </StackPanel>
+        </Grid>
+
+    </k:KinectRegion>
+</Window>

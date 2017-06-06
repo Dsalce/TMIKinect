@@ -1,0 +1,1157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RestSharp.Portable.Microsoft.OneDrive</name>
+    </assembly>
+    <members>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.ConservativeJsonSerializer.ConfigureSerializer(Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Configure the <see cref="T:RestSharp.Portable.Serializers.JsonSerializer"/>
+            </summary>
+            <param name="serializer">The serializer to configure</param>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.HttpRange">
+            <summary>
+            This class encapsualtes a HTTP range
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRange.#ctor(System.String,RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRange"/> class.
+            </summary>
+            <param name="unit">The unit of the range (currently only <code>bytes</code> is allowed)</param>
+            <param name="rangeItems">The HTTP range items for this range</param>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.HttpRange.Unit">
+            <summary>
+            Gets the unit for this HTTP range
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.HttpRange.RangeItems">
+            <summary>
+            Gets the HTTP range items
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRange.Parse(System.String)">
+            <summary>
+            Parses a <paramref name="range"/> into a new <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRange"/> instance
+            </summary>
+            <remarks>
+            The range must be in the form <code>unit=(range)+</code>
+            </remarks>
+            <param name="range">The range to parse</param>
+            <returns>The new <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRange"/></returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRange.ToString">
+            <summary>
+            Returns the textual representation of this range.
+            </summary>
+            <remarks>
+            The return value of this function can be parsed using <see cref="M:RestSharp.Portable.Microsoft.OneDrive.HttpRange.Parse(System.String)"/>.
+            </remarks>
+            <returns>The textual representation of this range</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRange.ToString(RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem)">
+            <summary>
+            Returns the textual representation of a single <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/>
+            </summary>
+            <remarks>
+            The return value of this function looks like <code>unit range/length</code>
+            </remarks>
+            <param name="rangeItem">The <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/> to get the textual representation for</param>
+            <returns>The textual representation of <paramref name="rangeItem"/></returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRange.ToString(RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem,System.Nullable{System.Int64})">
+            <summary>
+            Returns the textual representation of a single <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/>
+            </summary>
+            <remarks>
+            The return value of this function looks like <code>unit range/length</code>
+            </remarks>
+            <param name="rangeItem">The <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/> to get the textual representation for</param>
+            <param name="length">The length value to be used in the textual representation</param>
+            <returns>The textual representation of <paramref name="rangeItem"/></returns>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem">
+            <summary>
+            Range for a HTTP request or response
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/> class.
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem.#ctor(System.Nullable{System.Int64},System.Nullable{System.Int64})">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/> class.
+            </summary>
+            <param name="from">From byte</param>
+            <param name="to">To byte</param>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem.From">
+            <summary>
+            Gets the start position
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem.To">
+            <summary>
+            Gets the end position
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem.Parse(System.String)">
+            <summary>
+            Parses a <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/> from a string
+            </summary>
+            <remarks>
+            Allowed are: "*", "from-", "-to", "from-to"
+            </remarks>
+            <param name="rangeItem">The string to parse</param>
+            <returns>The new <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem"/></returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.HttpRangeItem.ToString">
+            <summary>
+            Returns the textual representation of the HTTP range item
+            </summary>
+            <returns>the textual representation of the HTTP range item</returns>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.IRequestFactory">
+            <summary>
+            A factory interface which is used by <see cref="T:RestSharp.Portable.Microsoft.OneDrive.OneDriveService"/> to create a new <see cref="T:RestSharp.Portable.IRestClient"/> implementation
+            and/or a new <see cref="T:System.Net.HttpWebRequest"/>.
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.IRequestFactory.CreateRestClient(System.Uri)">
+            <summary>
+            Creates a new instance of a <see cref="T:RestSharp.Portable.IRestClient"/>.
+            </summary>
+            <remarks>
+            The OAuth2 authenticator has to be set!
+            </remarks>
+            <param name="baseUri">The base <see cref="T:System.Uri"/> to initialize the rest client with</param>
+            <returns>The new <see cref="T:RestSharp.Portable.IRestClient"/> implementation</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.IRequestFactory.CreateWebRequest(System.Uri)">
+            <summary>
+            Create a new <see cref="T:System.Net.HttpWebRequest"/> for the given <paramref name="requestUri"/>
+            </summary>
+            <param name="requestUri">The <see cref="T:System.Uri"/> for the request</param>
+            <returns>The new <see cref="T:System.Net.HttpWebRequest"/> for the given <paramref name="requestUri"/></returns>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Audio">
+            <summary>
+            The Audio facet groups audio-related data on OneDrive into a single structure.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Audio"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> resources
+            that have associated audio.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Album">
+            <summary>
+            Gets or sets the title of the album for this audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.AlbumArtist">
+            <summary>
+            Gets or sets the artist named on the album for the audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Artist">
+            <summary>
+            Gets or sets the performing artist for the audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Bitrate">
+            <summary>
+            Gets or sets bitrate expressed in kbps.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Composers">
+            <summary>
+            Gets or sets the name of the composer of the audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Copyright">
+            <summary>
+            Gets or sets copyright information for the audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Disc">
+            <summary>
+            Gets or sets the number of the disc this audio file came from.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.DiscCount">
+            <summary>
+            Gets or sets the total number of discs in this album.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Duration">
+            <summary>
+            Gets or sets duration of the audio file, expressed in milliseconds.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Genre">
+            <summary>
+            Gets or sets the genre of this audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.HasDrm">
+            <summary>
+            Gets or sets a value indicating whether the file is protected with digital rights management.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.IsVariableBitrate">
+            <summary>
+            Gets or sets a value indicating whether the file is encoded with a variable bitrate.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Title">
+            <summary>
+            Gets or sets the title of the audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Track">
+            <summary>
+            Gets or sets the number of the track on the original disc for this audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.TrackCount">
+            <summary>
+            Gets or sets the total number of tracks on the original disc for this audio file.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Audio.Year">
+            <summary>
+            Gets or sets the year the audio file was recorded.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.ConflictBehavior">
+            <summary>
+            Determines what to do if an item with a matching name already exists in this folder.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.ConflictBehavior.Rename">
+            <summary>
+            OneDrive will append a number to the end of the item name (for files - before the extension).
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.ConflictBehavior.Replace">
+            <summary>
+            Content will be replaced
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.ConflictBehavior.Fail">
+            <summary>
+            Default behavior
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Deleted">
+            <summary>
+            The Deleted facet indicates that the item on OneDrive has been deleted.
+            </summary>
+            <remarks>
+            <para>
+            In this version of the API, the presence (non-null) of the facet value indicates
+            that the file was deleted. A null (or missing) value indicates that the file is not deleted.
+            </para>
+            <para>
+            Note: While this facet is empty today, in future API revisions the facet may be populated
+            with additional properties.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Drive">
+            <summary>
+            The Drive resource represents a drive in OneDrive.
+            </summary>
+            <remarks>
+            It provides information about the owner of the drive, total and available
+            storage space, and exposes a collection of all the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/>s contained within
+            the drive.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Drive.Id">
+            <summary>
+            Gets or sets the unique identifier of the drive.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Drive.DriveType">
+            <summary>
+            Gets or sets the enumerated value that identifies the type of drive account.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Drive.Owner">
+            <summary>
+            Gets or sets the user account that owns the drive.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Drive.Quota">
+            <summary>
+            Gets or sets the information about the drive's storage space quota.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.DriveType">
+            <summary>
+            Enumerated value that identifies the type of drive account.
+            </summary>
+            <remarks>
+            OneDrive drives will show as personal.
+            </remarks>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.DriveType.Personal">
+            <summary>
+            OneDrive drive
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.DriveType.Business">
+            <summary>
+            OneDrive business drive (Sharepoint)
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.File">
+            <summary>
+            The File facet groups file-related data on OneDrive into a single structure.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.File"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> resources that represent files.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.File.MimeType">
+            <summary>
+            Gets or sets the MIME type for the file.
+            </summary>
+            <remarks>
+            This is determined by logic on the server and might not be the value
+            provided when the file was uploaded.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.File.Hashes">
+            <summary>
+            Gets or sets the hashes of the file's binary content, if available.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.FileSystemInfo">
+            <summary>
+            The FileSystemInfo facet contains properties that are reported by the device's
+            local file system for the local version of an item.
+            </summary>
+            <remarks>
+            This facet can be used to specify the last modified date or created date of the
+            item as it was on the local device.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.FileSystemInfo.CreatedDateTime">
+            <summary>
+            Gets or sets the UTC date and time the file was created on a client.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.FileSystemInfo.LastModifiedDateTime">
+            <summary>
+            Gets or sets the UTC date and time the file was last modified on a client.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Folder">
+            <summary>
+            The Folder facet groups folder-related data on OneDrive into a single structure.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Folder"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> resources that represent folders.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Folder.ChildCount">
+            <summary>
+            Gets or sets number of children contained immediately within this container.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.HashesType">
+            <summary>
+            The Hashes facet groups different types of hashes into a single
+            structure, for an item on OneDrive.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.HashesType.Crc32Hash">
+            <summary>
+            Gets or sets the CRC32 value of the file (if available)
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.HashesType.Sha1Hash">
+            <summary>
+            Gets or sets the SHA1 hash for the contents of the file (if available)
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Identity">
+            <summary>
+            The Identity type represents an identity of an actor.
+            </summary>
+            <remarks>
+            For example, and actor can be a user, device, or application.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Identity.Id">
+            <summary>
+            Gets or sets the unique identifier for the identity.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Identity.DisplayName">
+            <summary>
+            Gets or sets the identity's display name.
+            </summary>
+            <remarks>
+            Note that this may not always be available or up to date.
+            For example, if a user changes their display name, OneDrive
+            may show the new value in a future response, but the items
+            associated with the user won't show up as having changed in
+            view.delta.
+            </remarks>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.IdentitySet">
+            <summary>
+            The IdentitySet type is a keyed collection of Identity objects.
+            </summary>
+            <remarks>
+            It is used to represent a set of identities associated with various events for an item, such as created by or last modified by.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.IdentitySet.User">
+            <summary>
+            Gets or sets the Identity resource that represents a user.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.IdentitySet.Application">
+            <summary>
+            Gets or sets the Identity resource that represents the application.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.IdentitySet.Device">
+            <summary>
+            Gets or sets the Identity resource that represents the device.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Image">
+            <summary>
+            The Image groups image-related data on OneDrive into a single structure.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Image"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/>
+            resources that represent images.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Image.Width">
+            <summary>
+            Gets or sets the width of the image, in pixels.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Image.Height">
+            <summary>
+            Gets or sets the height of the image, in pixels.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item">
+            <summary>
+            The Item resource type represents metadata for an item in OneDrive.
+            </summary>
+            <remarks>
+            All top-level filesystem objects in OneDrive are Item resources.
+            If an item is a Folder or File facet, the Item resource will contain
+            a value for either the folder or file property, respectively.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Id">
+            <summary>
+            Gets or sets the unique identifier of the item within the Drive. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Name">
+            <summary>
+            Gets or sets the name of the item (filename and extension). Read-write.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.ETag">
+            <summary>
+            Gets or sets the eTag for the entire item (metadata + content). Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.CTag">
+            <summary>
+            Gets or sets the eTag for the content of the item. Read-only.
+            </summary>
+            <remarks>
+            This eTag is not changed if only the metadata is changed.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.CreatedBy">
+            <summary>
+            Gets or sets the identity of the user, device, and application which created the item. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.ModifiedBy">
+            <summary>
+            Gets or sets the identity of the user, device, and application which last modified the item. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.CreatedDateTime">
+            <summary>
+            Gets or sets the date and time of item creation. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.LastModifiedDateTime">
+            <summary>
+            Gets or sets the date and time the item was last modified. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Size">
+            <summary>
+            Gets or sets the size of the item in bytes. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.WebUrl">
+            <summary>
+            Gets or sets the URL that displays the resource in the browser. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Description">
+            <summary>
+            Gets or sets the user-visible description of the item. Read-write.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.ParentReference">
+            <summary>
+            Gets or sets the parent information, if the item has a parent. Read-write.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Children">
+            <summary>
+            Gets or sets the collection containing Item objects for the immediate children of Item.
+            </summary>
+            <remarks>
+            Only items representing folders have children.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Folder">
+            <summary>
+            Gets or sets the folder metadata, if the item is a folder. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.File">
+            <summary>
+            Gets or sets the file metadata, if the item is a file. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.FileSystemInfo">
+            <summary>
+            Gets or sets the file system information on client. Read-write.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Image">
+            <summary>
+            Gets or sets the image metadata, if the item is an image. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Photo">
+            <summary>
+            Gets or sets the photo metadata, if the item is a photo. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Audio">
+            <summary>
+            Gets or sets the audio metadata, if the item is an audio file. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Video">
+            <summary>
+            Gets or sets the video metadata, if the item is a video. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Location">
+            <summary>
+            Gets or sets the location metadata, if the item has location data. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.SearchResult">
+            <summary>
+            Gets or sets the search metadata, if the item is from a search result.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Deleted">
+            <summary>
+            Gets or sets the information about the deleted state of the item. Read-only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Thumbnails">
+            <summary>
+            Gets or sets the Thumbnails for this item.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.SpecialFolder">
+            <summary>
+            Gets or sets the specialFolder facet that describes the identifier
+            used for accessing the special folder.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.ConflictBehavior">
+            <summary>
+            Gets or sets a value that determines what to do if an
+            item with a matching name already exists in this folder.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.ItemReference">
+            <summary>
+            The itemReference type groups data needed to reference a OneDrive
+            item across the service into a single structure.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ItemReference.DriveId">
+            <summary>
+            Gets or sets the unique identifier for the Drive that contains the item.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ItemReference.Id">
+            <summary>
+            Gets or sets the unique identifier for the item.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ItemReference.Path">
+            <summary>
+            Gets or sets the path that used to navigate to the item.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Location">
+            <summary>
+            The Location facet groups geographic location-related data on OneDrive into a single structure.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Location"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> resources
+            that have an associated geographic location.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Location.Altitude">
+            <summary>
+            Gets or sets the altitude (height), in feet, above sea level for the item.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Location.Latitude">
+            <summary>
+            Gets or sets the latitude, in decimal, for the item.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Location.Longitude">
+            <summary>
+            Gets or sets the longitude, in decimal, for the item.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Permission">
+            <summary>
+            Represents a permission on a OneDrive item.
+            </summary>
+            <remarks>
+            Permissions in OneDrive have a number of different forms. The <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Permission"/> object
+            represents these different forms through facets on the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Permission"/> object.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Permission.Id">
+            <summary>
+            Gets or sets the unique identifier of the permission among all permissions on the item. Read Only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Permission.Roles">
+            <summary>
+            Gets or sets the type of permission, e.g. <code>read</code>. See below for the full list of roles.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Permission.Link">
+            <summary>
+            Gets or sets the link details of the current permission, if it is a link type permissions. Read Only.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Permission.InheritedFrom">
+            <summary>
+            Gets or sets a reference to the ancestor of the current permission, if it is inherited from an ancestor. Read Only.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Photo">
+            <summary>
+            The Photo facet groups photo-related data on OneDrive, for example, EXIF
+            metadata, into a single structure.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Photo"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> resources
+            that represent photos.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.TakenDateTime">
+            <summary>
+            Gets or sets the date and time the photo was taken.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.CameraMake">
+            <summary>
+            Gets or sets the camera manufacturer.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.CameraModel">
+            <summary>
+            Gets or sets the camera model.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.FNumber">
+            <summary>
+            Gets or sets the F-stop value from the camera.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.ExposureDenominator">
+            <summary>
+            Gets or sets the denominator for the exposure time fraction from the camera.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.ExposureNumerator">
+            <summary>
+            Gets or sets the numerator for the exposure time fraction from the camera.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.FocalLength">
+            <summary>
+            Gets or sets the focal length from the camera.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Photo.Iso">
+            <summary>
+            Gets or sets the ISO value from the camera.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Quota">
+            <summary>
+            The Quota facet groups storage space quota-related information on OneDrive into a single structure.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Quota.Total">
+            <summary>
+            Gets or sets the total allowed storage space, in bytes.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Quota.Used">
+            <summary>
+            Gets or sets the total space used, in bytes.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Quota.Remaining">
+            <summary>
+            Gets or sets the total space remaining before reaching the quota limit, in bytes.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Quota.Deleted">
+            <summary>
+            Gets or sets the total space consumed by files in the recycle bin, in bytes.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Quota.State">
+            <summary>
+            Gets or sets the enumeration value that indicates the state of the storage space.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.QuotaState">
+            <summary>
+            Enumeration value that indicates the state of the storage space.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.QuotaState.Normal">
+            <summary>
+            The drive has plenty of remaining quota left.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.QuotaState.Nearing">
+            <summary>
+            Remaining quota is less than 10% of total quota space.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.QuotaState.Critical">
+            <summary>
+            Remaining quota is less than 1% of total quota space.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.QuotaState.Exceeded">
+            <summary>
+            The used quota has exceeded the total quota.
+            </summary>
+            <remarks>
+            New files or folders cannot be added to the drive until it is under the total quota amount.
+            </remarks>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.ResultList`1">
+            <summary>
+            Represents a collection of objects of type <typeparamref name="T"/>
+            </summary>
+            <typeparam name="T">The type of the collection returned</typeparam>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ResultList`1.Value">
+            <summary>
+            Gets or sets the returned collection
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.SearchResultFacet">
+            <summary>
+            The SearchResultFacet facet groups search result metadata into a single structure.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.SearchResultFacet.OnClickTelemetryUrl">
+            <summary>
+            Gets or sets the callback URL that is used to record telemetry information.
+            </summary>
+            <remarks>
+            The application should issue a GET on this URL if the user interacts with this item.
+            </remarks>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLink">
+            <summary>
+            The SharingLink type groups sharing link-related data on OneDrive into a single structure.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLink.Token">
+            <summary>
+            Gets or sets the  access token that represents the current link permission.
+            </summary>
+            <remarks>
+            You can use this in place of other authentication tokens to access the resource the
+            current permission is set for.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLink.Type">
+            <summary>
+            Gets or sets the  type of the link created.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLink.WebUrl">
+            <summary>
+            Gets or sets an URL that opens the item in the browser on the OneDrive website.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLink.Application">
+            <summary>
+            Gets or sets the app the link is associated with.
+            </summary>
+            <remarks>
+            The value is missing or null if the link is associated with an official Microsoft app.
+            </remarks>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLinkType">
+            <summary>
+            The type of the link created.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLinkType.View">
+            <summary>
+            A view-only sharing link, allowing read-only access.
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.Model.SharingLinkType.Edit">
+            <summary>
+            An edit sharing link, allowing read-write access.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.SpecialFolder">
+            <summary>
+            The SpecialFolder facet provides information about how a folder on OneDrive can be accessed
+            via the special folders collection.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.SpecialFolder.Name">
+            <summary>
+            Gets or sets the unique identifier for this item in the <code>/drive/special</code> collection
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Thumbnail">
+            <summary>
+            The Thumbnail resource type represents a thumbnail for an image,
+            video, document, or any file or folder on OneDrive that has a
+            graphical representation.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Thumbnail.Width">
+            <summary>
+            Gets or sets the width of the thumbnail, in pixels.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Thumbnail.Height">
+            <summary>
+            Gets or sets the height of the thumbnail, in pixels.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Thumbnail.Url">
+            <summary>
+            Gets or sets the URL used to fetch the thumbnail content.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.ThumbnailSet">
+            <summary>
+            The ThumbnailSet type is a keyed collection of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Thumbnail"/> objects.
+            </summary>
+            <remarks>
+            It is used to represent a set of thumbnails associated with a single file on OneDrive.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ThumbnailSet.Id">
+            <summary>
+            Gets or sets the id within the item.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ThumbnailSet.Small">
+            <summary>
+            Gets or sets the 48x48 cropped thumbnail.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ThumbnailSet.Medium">
+            <summary>
+            Gets or sets the 176x176 scaled thumbnail.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ThumbnailSet.Large">
+            <summary>
+            Gets or sets the 1920x1920 scaled thumbnail.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.ThumbnailSet.Source">
+            <summary>
+            Gets or sets the custom thumbnail image or the original image used to generate other thumbnails.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession">
+            <summary>
+            Provides information about a large file upload session.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession.UploadUrl">
+            <summary>
+            Gets or sets theURL where fragment PUT requests should be directed.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession.ExpirationDateTime">
+            <summary>
+            Gets or sets the date and time when the upload session expires.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession.NextExpectedRanges">
+            <summary>
+            Gets or sets the array of byte ranges the server is missing. Not always a full list of the missing ranges.
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession.ToHttpRange">
+            <summary>
+            Gets the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession.NextExpectedRanges"/> as <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRange"/>
+            </summary>
+            <returns>The new <see cref="T:RestSharp.Portable.Microsoft.OneDrive.HttpRange"/> created from the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.UploadSession.NextExpectedRanges"/>.</returns>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.Model.Video">
+            <summary>
+            The Video facet groups video-related data on OneDrive into a single complex type.
+            </summary>
+            <remarks>
+            It is available on the <see cref="P:RestSharp.Portable.Microsoft.OneDrive.Model.Item.Video"/> property of <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> resources
+            that represent videos.
+            </remarks>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Video.Bitrate">
+            <summary>
+            Gets or sets the bit rate of the video in bits per second.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Video.Duration">
+            <summary>
+            Gets or sets the duration of the file in milliseconds.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Video.Height">
+            <summary>
+            Gets or sets the height of the video, in pixels.
+            </summary>
+        </member>
+        <member name="P:RestSharp.Portable.Microsoft.OneDrive.Model.Video.Width">
+            <summary>
+            Gets or sets the width of the video, in pixels.
+            </summary>
+        </member>
+        <member name="T:RestSharp.Portable.Microsoft.OneDrive.OneDriveService">
+            <summary>
+            A class to access the OneDrive API V1
+            </summary>
+        </member>
+        <member name="F:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.DriveApiPath">
+            <summary>
+            The base path for the OneDrive API
+            </summary>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.#ctor(RestSharp.Portable.Microsoft.OneDrive.IRequestFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.OneDriveService"/> class.
+            </summary>
+            <param name="factory">The factory to create the <see cref="T:RestSharp.Portable.IRestClient"/> implementation and <see cref="T:System.Net.HttpWebRequest"/> instance.</param>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.CombinePath(System.String,System.String[])">
+            <summary>
+            Appends parts to a path
+            </summary>
+            <param name="path">The path to append to</param>
+            <param name="parts">The parts to append</param>
+            <returns>The </returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.CombinePath(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends parts to a path
+            </summary>
+            <param name="path">The path to append to</param>
+            <param name="parts">The parts to append</param>
+            <returns>The </returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.SplitPath(System.String)">
+            <summary>
+            Split the path into parts
+            </summary>
+            <param name="path">The path to split</param>
+            <returns>The parts of the path</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetDrivesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all drives for the user
+            </summary>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The list of all drives for the user</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetDefaultDriveAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the default drive for the user
+            </summary>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The default drive</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetRootFolderAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets the root folder for a drive
+            </summary>
+            <param name="driveId">The drive ID to get the root folder for</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The root folder of the given <paramref name="driveId"/></returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetSpecialFolderAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a special folder for the given <paramref name="driveId"/>
+            </summary>
+            <param name="driveId">The drive ID to get the special folder for</param>
+            <param name="name">The name of the special folder</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The special folder identified by the given <paramref name="name"/></returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetItemChildrenAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get all child items of a given item <paramref name="id"/>
+            </summary>
+            <param name="driveId">The drive ID the item <paramref name="id"/> belongs to.</param>
+            <param name="id">The item ID to get the children for</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The child items</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.CreateFolderAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Creates a folder item
+            </summary>
+            <param name="driveId">The drive ID of the given <paramref name="parentId"/></param>
+            <param name="parentId">The item ID where this folder will be created in</param>
+            <param name="name">The new folder name</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The newly created folder item</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.MoveAsync(System.String,System.String,System.String,RestSharp.Portable.Microsoft.OneDrive.Model.ItemReference,System.Threading.CancellationToken)">
+            <summary>
+            Moves an item with the <paramref name="itemId"/> to <paramref name="newParent"/> and changes its name to <paramref name="newName"/>
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="itemId"/> and <paramref name="newParent"/> belong to</param>
+            <param name="itemId">The ID of the item to move/rename</param>
+            <param name="newName">The new item name</param>
+            <param name="newParent">The new parent of the <paramref name="itemId"/></param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The new item</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.UpdateAsync(System.String,System.String,RestSharp.Portable.Microsoft.OneDrive.Model.Item,System.Threading.CancellationToken)">
+            <summary>
+            Updates an item with the <paramref name="itemId"/> with the values in <paramref name="newItemValues"/>
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="itemId"/> belongs to</param>
+            <param name="itemId">The ID of the item to modify</param>
+            <param name="newItemValues">Thew new item values</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The changed item</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.DeleteAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes an item with the <paramref name="itemId"/>
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="itemId"/> belongs to</param>
+            <param name="itemId">The ID of the item to delete</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The task</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetItemAsync(System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Gets an item with the <paramref name="itemId"/>
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="itemId"/> belongs to</param>
+            <param name="itemId">The ID of the item to get the meta data for</param>
+            <param name="withChildren">Include the children in the response?</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The item identified by <paramref name="itemId"/></returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetChildItemAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets a child item of <paramref name="parentId"/> with the given <paramref name="name"/>.
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="parentId"/> belongs to</param>
+            <param name="parentId">The ID of the item to get the child from</param>
+            <param name="name">The child item name</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The found child item</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetDownloadUrl(System.String,System.String)">
+            <summary>
+            Gets the download URL for the given <paramref name="itemId"/>
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="itemId"/> belongs to</param>
+            <param name="itemId">The ID of the item to get the download URL for</param>
+            <returns>The download URL</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetDownloadResponseAsync(System.String,System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Get a <see cref="T:System.Net.HttpWebResponse"/> to download a files contents
+            </summary>
+            <param name="driveId">The ID of the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Drive"/></param>
+            <param name="itemId">The ID of the <see cref="T:RestSharp.Portable.Microsoft.OneDrive.Model.Item"/> to download</param>
+            <param name="from">The offset where the download starts from</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The <see cref="T:System.Net.HttpWebResponse"/> used to download the file</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.UploadFileAsync(System.String,System.String,System.String,System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Uploads a file
+            </summary>
+            <param name="driveId">The drive ID the <paramref name="parentId"/> belongs to</param>
+            <param name="parentId">The ID where the new file will be created in</param>
+            <param name="name">The new file name</param>
+            <param name="input">The data to upload</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The newly created file item</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.GetOrCreateDirectoryAsync(System.String,RestSharp.Portable.Microsoft.OneDrive.Model.Item,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get or create the subfolder the <paramref name="folderItem"/> and <paramref name="path"/> are pointing to
+            </summary>
+            <param name="driveId">The drive ID</param>
+            <param name="folderItem">The folder item</param>
+            <param name="path">The path to the subfolder (divided by a /)</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>The metadata of the found or created subfolder</returns>
+        </member>
+        <member name="M:RestSharp.Portable.Microsoft.OneDrive.OneDriveService.Dispose">
+            <summary>
+            Dispose all resources
+            </summary>
+        </member>
+    </members>
+</doc>

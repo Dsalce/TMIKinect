@@ -1,0 +1,29 @@
+﻿<Window x:Class="ViewCommon.AcceptWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:k="http://schemas.microsoft.com/kinect/2013" 
+          WindowStyle="None"  WindowStartupLocation="CenterScreen" Background="#FF878FDE" Loaded="loadWindow" HorizontalAlignment="Center" VerticalAlignment="Center" Height="629" Width="909" >
+
+    <k:KinectRegion x:Name="kinectRegion"   >
+        <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="image/win.png"/>
+        </Grid.Background>
+        <k:KinectSensorChooserUI Name="sensorChooserUi"   Margin="301,0,365,452" />
+
+        <StackPanel Orientation="Vertical">
+
+            <Label Content="  ¡Lo has Terminado!" Height="Auto" Width="Auto" FontSize="80"  Margin="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+            <Label Content="     Buen Trabajo " Height="Auto" Width="Auto" Margin="0,0,0,50"  FontSize="80" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                <k:KinectTileButton Height="152" Content="ACEPTAR" FontSize="80" Background="#FFEA5B26"  Width="400" Click="acceptEvent" Margin="167,0,175,0"/>
+
+            </StackPanel>
+
+        </Grid>
+
+
+
+
+    </k:KinectRegion>
+
+</Window>

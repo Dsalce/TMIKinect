@@ -1,0 +1,86 @@
+﻿<Window x:Class="Paint_Kinect.Paint"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:k="http://schemas.microsoft.com/kinect/2013" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+      Title="Paint"  Loaded="load_window "
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ThreeDBorderWindow"
+      Background="#FF0A2255"
+          WindowState="Maximized" Closed="exitEvent" Height="897" Width="1404">
+    <Grid Name="g">
+        <k:KinectRegion x:Name="kinectRegion" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="305*"/>
+                    <ColumnDefinition x:Name="col2" Width="44*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="105*" />
+                    <RowDefinition Height="761*" />
+
+                </Grid.RowDefinitions>
+
+
+                <k:KinectSensorChooserUI Name="sensorChooserUi" Grid.Row="0" Grid.Column="0" Margin="656,15,524,50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <k:KinectTileButton    x:Name="new" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top"  Click="iniEvent"  Background="#FF0A2255" Height="106" Grid.RowSpan="2" Width="173" >
+                    <Image    x:Name="newImg"    Source="../images/new.png"  Height="110" Width="173"  Stretch="Fill" />
+                </k:KinectTileButton>
+                <k:KinectTileButton  x:Name="exit" Grid.Row="0"  Click="exitButton" FontWeight="Bold" Background="#FF0A2255"  Height="105" Width="173" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Image    x:Name="exitImg"      Source="../Images/exit.png"  Stretch="Fill" />
+                </k:KinectTileButton>
+                <k:KinectTileButton   x:Name="save"  Grid.Row="0" Grid.Column="0"  Click="saveEvent"   Height="105" Width="162" Margin="173,1,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2">
+                    <Image    x:Name="saveImg"    Source="../Images/save.png"   Stretch="Fill" />
+                </k:KinectTileButton>
+
+                <k:KinectScrollViewer x:Name="menu" VerticalContentAlignment="Stretch" Grid.Column="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled"   Margin="0,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+                    <StackPanel    Orientation="Vertical" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+                        <k:KinectTileButton   x:Name="pinceles" Height="153" Width="173" Click="changePencil" Margin="0,0,0,0"  Background="#FFF2EBFD" HorizontalAlignment="Left" VerticalAlignment="Top" >
+
+                            <Image    x:Name="pincelImg"    Source="../Images/pincel.jpg" Height="144" Width="173"  Stretch="Fill" />
+
+                        </k:KinectTileButton>
+                        <k:KinectTileButton   x:Name="tipoPen"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="153" Width="170" Click="changeSize" Margin="0,0,0,0"  Background="#FFF2EBFD" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  >
+
+                            <Image    x:Name="tipoPenImg"    Source="../Images/tamanyo.png" Height="144" Width="148"  Stretch="fill" />
+
+                        </k:KinectTileButton>
+                        <k:KinectTileButton   x:Name="goma"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="173" Click="gomaEvent"  Margin="0,0,0,0" Background="#FFF2EBFD" >
+                            <Image    x:Name="gomaImg" HorizontalAlignment="Left"    VerticalAlignment="Top"    Source="../Images/goma.jpg" Height="144" Width="173"  Stretch="Fill" />
+                        </k:KinectTileButton>
+
+
+                        <k:KinectTileButton   x:Name="colorSelec"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="152" Width="79"  Margin="40,0,0,0"  Background="#FF201F23"   />
+                        <k:KinectTileButton   x:Name="color"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="173" Click="colorSelected"  Margin="0,0,0,0"  Background="#FFF2EBFD" >
+                            <Image    x:Name="colorImg" HorizontalAlignment="Left"    VerticalAlignment="Top"    Source="../Images/color.jpg" Height="144" Width="173"  Stretch="Fill" />
+                        </k:KinectTileButton>
+                        <k:KinectTileButton   x:Name="mas"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="153" Width="177" Click="masEvent"  Margin="0,0,0,0" Background="#FFF2EBFD" >
+                            <Image    x:Name="masImg" HorizontalAlignment="Left"    VerticalAlignment="Top"    Source="../Images/mas.png" Height="144" Width="173"  Stretch="Fill" />
+                        </k:KinectTileButton>
+                        <k:KinectTileButton   x:Name="menos"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="153" Width="177" Click="menosEvent"  Margin="0,0,0,0" Background="#FFF2EBFD" >
+                            <Image    x:Name="menosImg" HorizontalAlignment="Left"    VerticalAlignment="Top"    Source="../Images/menos.png" Height="144" Width="173"  Stretch="Fill" />
+                        </k:KinectTileButton>
+
+                       
+                    </StackPanel>
+                </k:KinectScrollViewer>
+
+
+                <Canvas x:Name="paint" Height="Auto" Width="Auto" Grid.Row="1" Grid.Column="0"  Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Margin="0,0,0,0" TouchEnter="enter" TouchLeave="leave" >
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="0" Y="0" />
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                            <TranslateTransform X="0" Y="0" />
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                </Canvas>
+
+
+            </Grid>
+        </k:KinectRegion>
+    </Grid>
+</Window>

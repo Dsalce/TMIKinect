@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="ViewCommon.Crono"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Loaded="timeLoad" Background="Black">
+
+
+
+    <Label x:Name="time" Content="00:00:00" Background="White" Margin="10,10,10,10" FontSize="36"   />
+
+</UserControl>

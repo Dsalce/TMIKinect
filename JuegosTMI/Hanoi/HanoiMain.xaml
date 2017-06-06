@@ -1,0 +1,52 @@
+﻿<Window x:Class="Hanoi.HanoiMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:k="http://schemas.microsoft.com/kinect/2013"
+        Title="Hanoi"  WindowState="Maximized" Closed="exitEvent"
+        xmlns:MyNamespace="clr-namespace:Hanoi"
+        xmlns:cron="clr-namespace:ViewCommon;assembly=ViewCommon" 
+        Height="960" Width="1280"  Loaded="loadWindow" >
+
+    <Grid Name="grd" Background="Beige" >
+        <k:KinectRegion x:Name="kinectRegion"  >
+            <Grid Name="grid" Background="Beige">
+
+                <Canvas Name="canvasEsqueleto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,-8,0" Height="930" Width="1280"  />
+                <k:KinectSensorChooserUI Name="sensorChooserUi" Grid.Row="0" Grid.Column="0" Margin="656,15,524,50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <k:KinectTileButton  x:Name="ini" Grid.Row="0"  Click="iniEvent" FontWeight="Bold" Background="Beige"  Height="105" Width="173" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,1089,0" >
+                    <Image    x:Name="iniImg"      Source="Images/ini.png"  Stretch="Fill" />
+                </k:KinectTileButton>
+                
+                <k:KinectTileButton  x:Name="exit" Grid.Row="0"  Click="exitButton" FontWeight="Bold" Background="Beige"  Height="105" Width="173" HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Image    x:Name="exitImg"      Source="Images/exit.png"  Stretch="Fill" />
+                </k:KinectTileButton>
+                <MyNamespace:Peanas x:Name="peana" Margin="38,115,919,271"    Height="Auto" RenderTransformOrigin="1,1" />
+
+            <MyNamespace:Peanas  x:Name="peana1" Margin="480,115,483,271"    Height="Auto" RenderTransformOrigin="1,1" />
+
+            <MyNamespace:Peanas  x:Name="peana2" Margin="874,115,89,271"    Height="Auto" RenderTransformOrigin="1,1" />
+
+
+            <ItemsControl Name="container" Margin="0,0,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid />
+
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                    <MyNamespace:Pieza  x:Name="Big" Margin="60,526,959,355"   Source="Images/fig5.png" Size="5" Stretch="Fill" />
+                    <MyNamespace:Pieza x:Name="midBig" Margin="92,489,990,390"  Size="4" Source="Images/fig4.png" Stretch="Fill" />
+                    <MyNamespace:Pieza x:Name="midSmall" Margin="113,455,1011,426" Size="3" Source="Images/fig3.png" Stretch="Fill"  />
+                    <MyNamespace:Pieza x:Name="Small" Margin="140,421,1036,458" Size="2" Source="Images/fig2.png" Stretch="Fill" />
+                    <MyNamespace:Pieza x:Name="VerySmall"   Margin="157,389,1043,492"  Size="1" Source="Images/fig1.png" Stretch="Fill" />
+            </ItemsControl>
+
+            <Label   x:Name="Cursor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="405,70,0,0"  Height="68" Width="75">
+                <Image  x:Name="flecha" Source="Images/arrow.png" Stretch="Fill" Height="46" Width="53"/>
+            </Label>
+
+    </Grid>
+        </k:KinectRegion>
+    </Grid>
+</Window>
